@@ -47,21 +47,19 @@ run_checks() {
 		_found=1;
 	fi;
 	if [[ -n "$_found" ]]; then
-		printf "%-50s\t" "$_file"
-		if check_regex "$_file" "$aes_p"; then echo -n "AES "; fi
-		if check_regex "$_file" "$blowfish_p"; then echo -n "BLOWFISH "; fi
-		if check_regex "$_file" "$chacha_p"; then echo -n "ChaCha20 "; fi
-		if check_regex "$_file" "$curve25519_p"; then echo -n "curve25519 "; fi
-		if check_regex "$_file" "$des_p"; then echo -n "DES "; fi
-		if check_regex "$_file" "$md5_p"; then echo -n "MD5 "; fi
-		if check_regex "$_file" "$ripemd_p"; then echo -n "RIPEMD "; fi
-		if check_regex "$_file" "$sha1_p"; then echo -n "SHA1 "; fi
-		if check_regex "$_file" "$sha256_p"; then echo -n "SHA256 "; fi
-		if check_regex "$_file" "$sha512_p"; then echo -n "SHA512 "; fi
-		if check_regex "$_file" "$sha3_p"; then echo -n "SHA3 "; fi
-		if check_regex "$_file" "$siphash_p"; then echo -n "SIPHASH "; fi
-		if check_regex "$_file" "$whirlpool_p"; then echo -n "WHIRLPOOL "; fi
-		echo ""
+		if check_regex "$_file" "$aes_p"; then echo "AES $_file"; fi
+		if check_regex "$_file" "$blowfish_p"; then echo "BLOWFISH $_file"; fi
+		if check_regex "$_file" "$chacha_p"; then echo "ChaCha20 $_file"; fi
+		if check_regex "$_file" "$curve25519_p"; then echo "ECC $_file"; fi
+		if check_regex "$_file" "$des_p"; then echo "DES $_file"; fi
+		if check_regex "$_file" "$md5_p"; then echo "MD5 $_file"; fi
+		if check_regex "$_file" "$ripemd_p"; then echo "RIPEMD $_file"; fi
+		if check_regex "$_file" "$sha1_p"; then echo "SHA1 $_file"; fi
+		if check_regex "$_file" "$sha256_p"; then echo "SHA256 $_file"; fi
+		if check_regex "$_file" "$sha512_p"; then echo "SHA512 $_file"; fi
+		if check_regex "$_file" "$sha3_p"; then echo "SHA3 $_file"; fi
+		if check_regex "$_file" "$siphash_p"; then echo "SIPHASH $_file"; fi
+		if check_regex "$_file" "$whirlpool_p"; then echo "WHIRLPOOL $_file"; fi
 	fi
 }
 
@@ -69,9 +67,6 @@ if [[ "$#" -eq 0 ]]; then
 	usage
 	exit 1
 fi
-
-printf "%-50s\t%s\n" "File" "Primitives"
-printf "====                                               \t==========\n"
 
 for arg in "$@"; do
 	find -H "$arg" -print0 | while IFS= read -r -d '' file; do
